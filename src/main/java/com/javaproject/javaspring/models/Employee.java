@@ -15,6 +15,8 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int empId;
+    @Column(name = "employee_number")
+    public int employeeNumber;
     @Column(name = "first_name")
     public String empName;
     @Column(name = "last_name")
@@ -28,8 +30,9 @@ public class Employee {
     @Column(name = "salary")
     public int salary;
 
-    public Employee(int empId, String empName, String empLastName, String cellNumber, String email, String role, int salary) {
+    public Employee(int empId,int employeeNumber, String empName, String empLastName, String cellNumber, String email, String role, int salary) {
         this.empId = empId;
+        this.employeeNumber =employeeNumber;
         this.empName = empName;
         this.empLastName = empLastName;
         this.cellNumber = cellNumber;
@@ -45,6 +48,11 @@ public class Employee {
     public String getEmpName() {
         return empName;
     }
+
+     public int getEmployeeNumber(){
+        return employeeNumber;
+     }  
+    
 
     public String getEmpLastName() {
         return empLastName;
@@ -70,6 +78,10 @@ public class Employee {
         this.empId = empId;
     }
 
+    public void setEmpNumber(int employeeNumber){
+        this.employeeNumber = employeeNumber;
+    }
+
     public void setEmpName(String empName) {
         this.empName = empName;
     }
@@ -92,5 +104,16 @@ public class Employee {
 
     public void setSalary(int salary) {
         this.salary = salary;
+    }
+
+    public boolean equals(Object obj){
+        if(this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof Employee)) return false;
+        Employee other = (Employee) obj;
+        if (empId == 0) {
+            if (other.empId != 0) return false;
+        } else if (!(empId == other.empId)) return false;
+        return true;
     }
 }
